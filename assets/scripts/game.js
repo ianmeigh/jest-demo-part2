@@ -11,6 +11,17 @@ function newGame() {
   game.currentGame = [];
   game.playerMoves = [];
   game.turnNumber = 0;
+  document.querySelectorAll(".circle").forEach(element => {
+    if (element.getAttribute("data-listener") !== "true") {
+      element.addEventListener("click", (e) => {
+        let move = e.target.getAttribute("id");
+        lightsOn(move);
+        game.playerMoves.push(move);
+        // playerTurn();
+      });
+      element.setAttribute("data-listener", "true");
+    }
+  });
   showScore();
   addTurn();
 }
