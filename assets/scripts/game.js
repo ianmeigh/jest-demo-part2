@@ -21,4 +21,12 @@ const addTurn = () => {
   // showTurns();
 };
 
-module.exports = { game, newGame, showScore, addTurn };
+const lightsOn = (circ) => {
+  const button = document.getElementById(circ);
+  button.classList.add("light");
+  setTimeout(() => {
+    button.classList.remove("light");
+  }, 400);
+};
+
+module.exports = { game, newGame, showScore, addTurn, lightsOn };
