@@ -4,6 +4,8 @@
 
 const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
 
+jest.spyOn(window, "alert").mockImplementation(() => { });
+
 beforeAll(() => {
   let fs = require("fs");
   const fileContents = fs.readFileSync("index.html", "utf-8");
@@ -106,9 +108,14 @@ describe("Gameplay works correctly", () => {
     playerTurn();
     expect(game.score).toBe(2);
   });
-    test("Element with the id of 'score' should show 1 if first turn is correct", () => {
+  test("Element with the id of 'score' should show 1 if first turn is correct", () => {
     game.playerMoves.push(game.currentGame[0]);
     playerTurn();
     expect(document.getElementById("score").innerText).toEqual(1);
+  });
+  test("Should call an alert if the players moves are incorrect, do not match", () => {
+    game.playerMoves.push("wrong answer");
+    playerTurn();
+    expect(window.alert).toBeCalledWith("Wrong Move!");
   });
 });

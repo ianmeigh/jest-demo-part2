@@ -54,16 +54,34 @@ const showTurns = () => {
 };
 
 function playerTurn() {
-  if (game.currentGame.length == game.playerMoves.length) {
-    if (game.currentGame.every((value, index) => value === game.playerMoves[index])) {
-      console.log("correct");
+
+  /* Checks after each move has been entered */
+
+  let i = game.playerMoves.length - 1;
+  if (game.currentGame[i] === game.playerMoves[i]) {
+    if (game.currentGame.length == game.playerMoves.length) {
       game.score++;
       showScore();
       addTurn();
-    } else {
-      console.log("incorrect");
     }
+  } else {
+    window.alert("Wrong Move!");
+    newGame();
   }
+
+  /* Checks after all moves have been entered */
+
+  // if (game.currentGame.length == game.playerMoves.length) {
+  //   if (game.currentGame.every((value, index) => value === game.playerMoves[index])) {
+  //     console.log("correct");
+  //     game.score++;
+  //     showScore();
+  //     addTurn();
+  //   } else {
+  //     console.log("incorrect");
+  //     window.alert("Wrong Move!");
+  //   }
+  // }
 }
 
 module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn };
