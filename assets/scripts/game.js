@@ -35,10 +35,9 @@ const addTurn = () => {
 };
 
 const lightsOn = (circ) => {
-  const button = document.getElementById(circ);
-  button.classList.add("light");
+  document.getElementById(circ).classList.add("light");
   setTimeout(() => {
-    button.classList.remove("light");
+    document.getElementById(circ).classList.remove("light");
   }, 400);
 };
 
