@@ -106,4 +106,9 @@ describe("Gameplay works correctly", () => {
     playerTurn();
     expect(game.score).toBe(2);
   });
+    test("Element with the id of 'score' should show 1 if first turn is correct", () => {
+    game.playerMoves.push(game.currentGame[0]);
+    playerTurn();
+    expect(document.getElementById("score").innerText).toEqual(1);
+  });
 });

@@ -26,7 +26,7 @@ function newGame() {
   addTurn();
 }
 
-const showScore = () => document.getElementById("score").innerText = 0;
+const showScore = () => document.getElementById("score").innerText = game.score;
 
 const addTurn = () => {
   game.playerMoves = [];
