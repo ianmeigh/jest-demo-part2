@@ -17,7 +17,7 @@ function newGame() {
         let move = e.target.getAttribute("id");
         lightsOn(move);
         game.playerMoves.push(move);
-        // playerTurn();
+        playerTurn();
       });
       element.setAttribute("data-listener", "true");
     }
@@ -53,4 +53,17 @@ const showTurns = () => {
   }, 800);
 };
 
-module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns };
+function playerTurn() {
+  if (game.currentGame.length == game.playerMoves.length) {
+    if (game.currentGame.every((value, index) => value === game.playerMoves[index])) {
+      console.log("correct");
+      game.score++;
+      showScore();
+      addTurn();
+    } else {
+      console.log("incorrect");
+    }
+  }
+}
+
+module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn };
