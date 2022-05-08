@@ -9,13 +9,15 @@ const anOrder = {
   ]
 };
 
-const orderTotal = order => {
-  const totalItems = order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + (cur.price * (cur.quantity || 1)), 0);
+let orderTotal = order => {
+  let items = order.items.filter(x => !x.shipping);
+  const sumOfItems = items.reduce((acc, cur) => acc + (cur.price * (cur.quantity || 1)), 0);
   const shippingItem = order.items.find(x => !!x.shipping);
   if (shippingItem) {
-    return totalItems + shippingItem.price;
+    const shipping = sumOfItems >= 1000 ? 0 : shippingItem.price * items.length;
+    return sumOfItems + shipping;
   }
-  return totalItems;
+  return sumOfItems;
 };
 
 module.exports = { anOrder, orderTotal };

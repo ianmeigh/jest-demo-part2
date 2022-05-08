@@ -54,22 +54,40 @@ describe("Test Order Total Function", () => {
     const sampleOrder = {
       items: [
         { "name": 'Item 1', price: 1, quantity: 3 },
-        { "name": 'Item 2', price: 2, quantity: 2 },
-        { "name": 'Item 3', price: 3, quantity: 1 },
         { "name": "Shipping", price: 10, shipping: true }
       ]
     };
-    expect(orderTotal(sampleOrder)).toEqual(20);
+    expect(orderTotal(sampleOrder)).toEqual(13);
   });
   test("orderTotal calculates the correct sum with quantity where quantity and shipping is provided, Example 2", () => {
+    const sampleOrder = {
+      items: [
+        { "name": 'Item 2', price: 2, quantity: 2 },
+        { "name": "Shipping", price: 10, shipping: true }
+      ]
+    };
+    expect(orderTotal(sampleOrder)).toEqual(14);
+  });
+  test("If orderTotal < 1000, shipping should charged per item", () => {
     const sampleOrder = {
       items: [
         { "name": 'Item 1', price: 1, quantity: 3 },
         { "name": 'Item 2', price: 2, quantity: 2 },
         { "name": 'Item 3', price: 3, quantity: 1 },
-        { "name": "Shipping", price: 20, shipping: true }
+        { "name": "Shipping", price: 10, shipping: true }
       ]
     };
-    expect(orderTotal(sampleOrder)).toEqual(30);
+    expect(orderTotal(sampleOrder)).toEqual(40);
+  });
+  test("If orderTotal >= 1000, shipping should be free", () => {
+    const sampleOrder = {
+      items: [
+        { "name": 'Item 1', price: 1, quantity: 3 },
+        { "name": 'Item 2', price: 2, quantity: 2 },
+        { "name": 'Item 3', price: 993, quantity: 1 },
+        { "name": "Shipping", price: 1000, shipping: true }
+      ]
+    };
+    expect(orderTotal(sampleOrder)).toEqual(1000);
   });
 });
