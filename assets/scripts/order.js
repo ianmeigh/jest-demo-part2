@@ -10,7 +10,7 @@ const anOrder = {
 
 const orderTotal = order => (order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + cur.price * (cur.quantity || 1), 0));
 
-module.exports = orderTotal;
+module.exports = { anOrder, orderTotal };
 
 /* !! - https://brianflove.com/2014-09-02/whats-the-double-exclamation-mark-for-in-javascript/
 

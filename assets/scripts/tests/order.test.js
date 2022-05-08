@@ -1,6 +1,25 @@
-const orderTotal = require("../order");
+const { anOrder, orderTotal } = require("../order");
 
-describe("Test Order Total", () => {
+describe("Test order object", () => {
+  test("Each order item should contain 'name' key", () => {
+    anOrder.items.forEach(element => {
+      expect("name" in element).toBe(true);
+    });
+  });
+  test("Each order item should contain 'name' key", () => {
+    anOrder.items.forEach(element => {
+      expect("name" in element).toBe(true);
+    });
+  });
+  test("Each order item should contain 'quantity' key", () => {
+    anOrder.items.forEach(element => {
+      expect("quantity" in element).toBe(true);
+    });
+  });
+});
+
+
+describe("Test Order Total Function", () => {
   test("orderTotal calculates the correct order total", () => {
     const sampleOrder = {
       items: [
