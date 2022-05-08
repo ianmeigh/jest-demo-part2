@@ -4,11 +4,19 @@
 const anOrder = {
   items: [
     { "name": 'Dragon Food', price: 8, quantity: 6 },
-    { "name": 'Dragon Cage (small)', price: 800, quantity: 2 }
+    { "name": 'Dragon Cage (small)', price: 800, quantity: 2 },
+    { "name": "Shipping", price: 20, shipping: true }
   ]
 };
 
-const orderTotal = order => (order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + cur.price * (cur.quantity || 1), 0));
+const orderTotal = order => {
+  const totalItems = order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + (cur.price * (cur.quantity || 1)), 0);
+  const shippingItem = order.items.find(x => !!x.shipping);
+  if (shippingItem) {
+    return totalItems + shippingItem.price;
+  }
+  return totalItems;
+};
 
 module.exports = { anOrder, orderTotal };
 
