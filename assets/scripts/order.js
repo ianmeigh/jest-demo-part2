@@ -3,12 +3,12 @@
 
 const anOrder = {
   items: [
-    { "name": 'Dragon Food', price: 8 },
-    { "name": 'Dragon Cage (small)', price: 800 }
+    { "name": 'Dragon Food', price: 8, quantity: 6 },
+    { "name": 'Dragon Cage (small)', price: 800, quantity: 2 }
   ]
 };
 
-const orderTotal = order => (order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + cur.price, 0));
+const orderTotal = order => (order.items.filter(x => !x.shipping).reduce((acc, cur) => acc + cur.price * (cur.quantity || 1), 0));
 
 module.exports = orderTotal;
 
